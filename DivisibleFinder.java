@@ -6,10 +6,16 @@ public class DivisibleFinder {
 		private class Node{
 			
 			private int data;
-			private Node next = null;
+			private Node next;
 			
 			private Node(int i){
 				data = i;
+				next = null;
+			}
+			
+			private Node(int i, Node n){
+				data = i;
+				next = n;
 			}
 			
 		}
@@ -25,10 +31,22 @@ public class DivisibleFinder {
 		}
 		
 		private void insert(int i){
-			Node n = head;
-			while(n != null){
-				
+			if(head == null){
+				head = new Node(i);
+				return;
 			}
+			if(i < head.data){
+				head = new Node(i, head);
+				return;
+			}
+			Node n = head;
+			while(n.next != null){
+				if(i < n.next.data){
+					n.next = new Node(i, n.next);
+					return;
+				}
+			}
+			n.next = new Node(i);
 		}
 		
 	}
